@@ -8,7 +8,7 @@ const firstPromise = new Promise((resolve, reject) => {
 
     if (even.button === 0) {
       clearTimeout(timeoutFirstPromise);
-      resolve();
+      resolve('First promise was resolved');
     }
   });
 
@@ -18,21 +18,21 @@ const firstPromise = new Promise((resolve, reject) => {
 });
 
 firstPromise
-  .then(() => {
+  .then((message) => {
     const succes = document.createElement('div');
 
     succes.setAttribute('class', 'success');
     succes.setAttribute('data-qa', 'notification');
-    succes.textContent = 'First promise was resolved';
+    succes.textContent = message;
 
     body.append(succes);
   })
-  .catch(() => {
+  .catch((message) => {
     const error = document.createElement('div');
 
     error.setAttribute('class', 'error');
     error.setAttribute('data-qa', 'notification');
-    error.textContent = 'First promise was rejected';
+    error.textContent = message.message;
 
     body.append(error);
   });
@@ -40,28 +40,28 @@ firstPromise
 const secondPromise = new Promise((resolve, reject) => {
   document.addEventListener('mousedown', (even) => {
     if (even.button === 0 || even.button === 2) {
-      resolve();
+      resolve('Second promise was resolved');
     }
   });
 });
 
 secondPromise
-  .then(() => {
+  .then((message) => {
     const succes = document.createElement('div');
 
     succes.setAttribute('class', 'success');
     succes.setAttribute('data-qa', 'notification');
-    succes.textContent = 'Second promise was resolved';
+    succes.textContent = message;
 
     body.append(succes);
   })
 
-  .catch(() => {
+  .catch((message) => {
     const error = document.createElement('div');
 
     error.setAttribute('class', 'error');
     error.setAttribute('data-qa', 'notification');
-    error.textContent = 'Second promise was rejected';
+    error.textContent = message;
 
     body.append(error);
   });
@@ -82,28 +82,28 @@ const thirdPromise = new Promise((resolve, reject) => {
     }
 
     if (counterLeft && counterRight) {
-      resolve();
+      resolve('Third promise was resolved');
     }
   });
 });
 
 thirdPromise
-  .then(() => {
+  .then((message) => {
     const success = document.createElement('div');
 
     success.setAttribute('class', 'success');
     success.setAttribute('data-qa', 'notification');
-    success.textContent = 'Third promise was resolved';
+    success.textContent = message;
 
     body.append(success);
   })
 
-  .catch(() => {
+  .catch((message) => {
     const error = document.createElement('div');
 
     error.setAttribute('class', 'error');
     error.setAttribute('data-qa', 'notification');
-    error.textContent = 'Third promise was rejected';
+    error.textContent = message;
 
     body.append(error);
   });
