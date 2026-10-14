@@ -38,10 +38,14 @@ firstPromise
   });
 
 const secondPromise = new Promise((resolve, reject) => {
-  document.addEventListener('mousedown', (even) => {
-    if (even.button === 0 || even.button === 2) {
-      resolve('Second promise was resolved');
-    }
+  document.addEventListener('click', (even) => {
+    even.preventDefault();
+    resolve('Second promise was resolved');
+  });
+
+  document.addEventListener('contextmenu', (even) => {
+    even.preventDefault();
+    resolve('Second promise was resolved');
   });
 });
 
@@ -70,20 +74,24 @@ const thirdPromise = new Promise((resolve, reject) => {
   let counterLeft = false;
   let counterRight = false;
 
-  document.addEventListener('mousedown', (even) => {
-    even.preventDefault();
-
-    if (even.button === 0) {
-      counterLeft = true;
-    }
-
-    if (even.button === 2) {
-      counterRight = true;
-    }
-
+  function check() {
     if (counterLeft && counterRight) {
       resolve('Third promise was resolved');
     }
+  }
+
+  document.addEventListener('click', (even) => {
+    if (even.button === 0) {
+      even.preventDefault();
+      counterLeft = true;
+      check();
+    }
+  });
+
+  document.addEventListener('contextmenu', (even) => {
+    even.preventDefault();
+    counterRight = true;
+    check();
   });
 });
 
